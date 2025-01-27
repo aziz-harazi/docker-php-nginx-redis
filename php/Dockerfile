@@ -13,11 +13,11 @@ COPY --from=composer:2.4 /usr/bin/composer /usr/bin/composer
 
 COPY ./app/composer.* ./
 
-RUN composer install --prefer-dist --no-dev --no-scripts
+RUN #composer install --prefer-dist --no-dev --no-scripts
 
 COPY ./app .
 
-RUN composer dump-autoload --optimize
+RUN #composer dump-autoload --optimize
 
 FROM app AS app_dev
 
