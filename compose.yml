@@ -11,11 +11,14 @@ services:
     build:
       dockerfile: ./php/Dockerfile
       target: app
-  db:
-    image: mysql:8.0
     volumes:
-      - mysqldata:/var/lib/mysql
-    restart: unless-stopped # replace with always in production
+      - /srv/vendor # Cannot be overwritten
+      - ./app:/srv
+  db:
+    image: mariadb:latest
+    volumes:
+      - mariadbdata:/var/lib/mysql
+    restart: always # replace with always in production
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_USER: user
@@ -23,7 +26,7 @@ services:
       MYSQL_DATABASE: nginxphpredis
 
 volumes:
-  mysqldata: ~
+  mariadbdata: ~
 
 
   # php

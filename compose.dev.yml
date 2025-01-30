@@ -25,23 +25,23 @@ services:
     extra_hosts:
       host.docker.internal: host-gateway
   db:
-    image: mysql:8.0
+    image: mariadb:latest
     volumes:
-      - mysqldata:/var/lib/mysql
+      - mariadbdata:/var/lib/mysql
     ports:
       - "3306:3306"
-    restart: unless-stopped
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: secret
-      MYSQL_USER: user
-      MYSQL_PASSWORD: secret
-      MYSQL_DATABASE: nginxphpredis
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD:  ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
 
   cache:
     image: redis:latest
 
 volumes:
-  mysqldata: ~
+  mariadbdata: ~
 
 
   # php
