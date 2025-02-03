@@ -4,11 +4,11 @@ CREATE TABLE `country` (
                             PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `invention` (
+CREATE TABLE `constructor` (
                                `id` int NOT NULL AUTO_INCREMENT,
                                `country_id` int NOT NULL,
                                `type` varchar(255) NOT NULL,
-                               `brand` varchar(255) NOT NULL,
+                               `name` varchar(255) NOT NULL,
                                PRIMARY KEY (`id`),
                                KEY `IDX_COUNTRY_ID` (`country_id`),
                                CONSTRAINT `FK_CONFERENCE_ID` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`)
@@ -26,13 +26,13 @@ INSERT INTO `country` (`id`, `name`) VALUES
                                           (5, 'Korea'),
                                           (6, 'Germany');
 
-INSERT INTO `invention` (`id`, `country_id`, `type`, `brand`) VALUES
+INSERT INTO `constructor` (`id`, `country_id`, `type`, `name`) VALUES
                                                                              (1, 1, 'car', 'Peugeot'),
-                                                                             (2, 2, 'moto', 'Harley Davidson'),
-                                                                             (3, 3, 'car', 'Ferrari'),
-                                                                             (4, 4, 'car', 'Mitsubishi'),
+                                                                             (2, 2, 'motocycle', 'Harley Davidson'),
+                                                                             (3, 4, 'car', 'Ferrari'),
+                                                                             (4, 3, 'car', 'Mitsubishi'),
                                                                              (5, 5, 'car', 'Hyundai'),
                                                                              (6, 6, 'car', 'Mercedes'),
-                                                                             (7, 3, 'moto', 'Suzuki'),
-                                                                             (8, 4, 'moto', 'Ducati');
+                                                                             (7, 3, 'motocycle', 'Suzuki'),
+                                                                             (8, 4, 'motocycle', 'Ducati');
 

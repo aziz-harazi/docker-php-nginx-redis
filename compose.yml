@@ -7,6 +7,8 @@ services:
       - "8082:80"
     volumes:
       - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+
+  # php
   app:
     build:
       dockerfile: ./php/Dockerfile
@@ -14,6 +16,8 @@ services:
     volumes:
       - /srv/vendor # Cannot be overwritten
       - ./app:/srv
+
+  # mariadb
   db:
     image: mariadb:latest
     volumes:
@@ -21,14 +25,13 @@ services:
     restart: always # replace with always in production
     environment:
       MYSQL_ROOT_PASSWORD: secret
-      MYSQL_USER: user
+      MYSQL_USER: dockeruser
       MYSQL_PASSWORD: secret
       MYSQL_DATABASE: nginxphpredis
 
-volumes:
-  mariadbdata: ~
-
-
-  # php
-  # mysql
   # redis
+  cache:
+    image: redis:latest
+
+volumes:
+  mariadbdata:
